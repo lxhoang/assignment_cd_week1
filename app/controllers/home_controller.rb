@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   def menu
   	@sections = Section.all
   	if params[:section_id].present?
-  		@current_session = Section.find(params[:section_id])
+  		@current_secion = Section.find(params[:section_id])
   	end
   end
 end
