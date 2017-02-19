@@ -6,11 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Section.destroy_all
+# FoodItem.destroy_all
+
 if Section.count == 0
 	puts "Seeding Section data"
 	%w(Breakfast Lunch Dinner Drinks).each do |name|
 		Section.create!(name: name)
-	end	
+	end
+
 else
 	puts "You already have some section data"
 end

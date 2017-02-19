@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
 	def new
 		@item = FoodItem.find(params[:food_item_id])
-		# @order = Order.new(food_item: @item)
 		@order = @item.orders.build
 	end
 
@@ -9,8 +8,9 @@ class OrdersController < ApplicationController
 		@item = FoodItem.find(params[:food_item_id])
 		@order = @item.orders.build order_params
 
-		if @order.save
-			redirect_to menu_path, flash: {success: 'Thank for your order.'}
+		if @order.save!
+			flash[:notice] = "Thanks for your order"
+			redirect_to menu_path
 		else 
 			render 'new'
 		end
