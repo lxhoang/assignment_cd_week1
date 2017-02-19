@@ -5,82 +5,115 @@
 <% end %>
 
 <div class="card card-block">
-	<%= hidden_field_tag :section, params[:section] %>
-	<%= form_tag nil, method: 'get' do %>
-		<div class="form-inline">
-			<%= select_tag :sort_column, options_for_select(['name', 'price']), class: 'form-control'  %>
-			<%= select_tag :sort_direction, options_for_select(['asc', 'desc']), class: 'form-control'  %>
-			<%= submit_tag "Sort", class: 'btn btn-secondary' %>
-		</div>
+		<%= hidden_field_tag :section, params[:section] %>
+		<%= form_tag nil, method: 'get' do %>
+			<div class="form-inline">
+				<%= select_tag :sort_column, options_for_select(['name', 'price']), class: 'form-control'  %>
+				<%= select_tag :sort_direction, options_for_select(['asc', 'desc']), class: 'form-control'  %>
+				<%= submit_tag "Sort", class: 'btn btn-secondary' %>
+			</div>
+			
+
+		<% end %>
+</div>
+
+<% if @search_keyword %>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th></th>
+				</tr>
+			</thead>
 		
-
-	<% end %>
-</div>
-
-<div class="btn-group" role="group" aria-label="Basic example">
-  <% @sections.each do |section| %>
-			<%= link_to section.name, menu_path(section_id: section.id), class: "btn #{params[:section_id]==section.id.to_s ? 'btn-primary active' : 'btn-secondary'}"  %>
-	<%end%>
-</div>
-
-<% if @current_secion %>
-
-		<% if @current_secion.food_items.empty? %>
-			<p>Currently we do not serve the <%= @current_secion.name%>. Sorry about this inconvenience</p>
-		<%else%>
-			<table class="table">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>Image</th>
-				<th></th>
-			</tr>
-		</thead>
 		<div class='tbody'>
-			<% @current_secion.food_items.each do |item| %>
-				<tr>
-					<td> <%= item.name %> </td>
-					<td> <%= number_to_currency item.price %> </td>
-					<td><%=  item.description %></td>
-					<td><%= image_tag item.image_url, size: "300x300" %></td>
-					<td><%= link_to "Order", new_food_item_order_path(item), class: 'btn btn-primary'  %></td>
-				</tr>
-			<% end %>
+		<% @food_items.all.each do |item| %>
+				
+					<tr>
+						<td> <%= item.name %> </td>
+						<td> <%= number_to_currency item.price %> </td>
+						<td><%=  item.description %></td>
+						<td><%= image_tag item.image_url, size: "300x300" %></td>
+						<td><%= link_to "Order", new_food_item_order_path(item), class: 'btn btn-primary' %></td>
+					</tr>
 
-		</div>
+			</div>
+			
+			
 		<%end%>
-	</table>
-<% else %>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>Image</th>
-				<th></th>
-			</tr>
-		</thead>
-	
-	<div class='tbody'>
-	<% Section.all.each do |section| %>
-		<% section.food_items.each do |item|%>		
-				<tr>
-					<td> <%= item.name %> </td>
-					<td> <%= number_to_currency item.price %> </td>
-					<td><%=  item.description %></td>
-					<td><%= image_tag item.image_url, size: "300x300" %></td>
-					<td><%= link_to "Order", new_food_item_order_path(item), class: 'btn btn-primary' %></td>
-				</tr>
+		</table>
 
-		</div>
+<%else%>	
+
+	<div class="btn-group" role="group" aria-label="Basic example">
+	  <% @sections.each do |section| %>
+				<%= link_to section.name, menu_path(section_id: section.id), class: "btn #{params[:section_id]==section.id.to_s ? 'btn-primary active' : 'btn-secondary'}"  %>
 		<%end%>
+	</div>
+
+	<% if @current_secion %>
+
+			<% if @current_secion.food_items.empty? %>
+				<p>Currently we do not serve the <%= @current_secion.name%>. Sorry about this inconvenience</p>
+			<%else%>
+				<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th></th>
+				</tr>
+			</thead>
+			<div class='tbody'>
+				<% @current_secion.food_items.each do |item| %>
+					<tr>
+						<td> <%= item.name %> </td>
+						<td> <%= number_to_currency item.price %> </td>
+						<td><%=  item.description %></td>
+						<td><%= image_tag item.image_url, size: "300x300" %></td>
+						<td><%= link_to "Order", new_food_item_order_path(item), class: 'btn btn-primary'  %></td>
+					</tr>
+				<% end %>
+
+			</div>
+			<%end%>
+		</table>
+	<% else %>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th></th>
+				</tr>
+			</thead>
 		
-	<%end%>
-	</table>
-	
-<% end %>
+		<div class='tbody'>
+		<% Section.all.each do |section| %>
+			<% section.food_items.each do |item|%>		
+					<tr>
+						<td> <%= item.name %> </td>
+						<td> <%= number_to_currency item.price %> </td>
+						<td><%=  item.description %></td>
+						<td><%= image_tag item.image_url, size: "300x300" %></td>
+						<td><%= link_to "Order", new_food_item_order_path(item), class: 'btn btn-primary' %></td>
+					</tr>
+
+			</div>
+			<%end%>
+			
+		<%end%>
+		</table>
+		
+	<% end %>
+
+<%end%>
 
 

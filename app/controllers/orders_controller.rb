@@ -9,7 +9,8 @@ class OrdersController < ApplicationController
 		@order = @item.orders.build order_params
 
 		if @order.save!
-			flash[:notice] = "Thanks for your order, the meal will be shipped to #{@order.address}"
+			flash[:notice] = "Thanks for your order.
+			The meal will be shipped to #{@order.address} at #{@order.created_at.strftime('%B %d, %Y')}"
 			redirect_to menu_path
 		else 
 			render 'new'
