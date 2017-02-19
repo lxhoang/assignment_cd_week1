@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 		@order = @item.orders.build order_params
 
 		if @order.save!
-			flash[:notice] = "Thanks for your order"
+			flash[:notice] = "Thanks for your order, the meal will be shipped to #{@order.address}"
 			redirect_to menu_path
 		else 
 			render 'new'
@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 	end
 
 	def order_params
-		params.require(:order).permit(:quantity)
+		params.require(:order).permit(:quantity, :address)
 	end
 
 end

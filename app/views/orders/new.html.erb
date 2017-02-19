@@ -6,7 +6,28 @@
 <% end %>
 <div class="form_group">
 	<%= f.label :quantity %>
-	<%= f.number_field :quantity %>
+	<%= f.number_field :quantity %><br>
+	<%= f.label :address %>
+	<%= f.text_field :address %>
 </div>
 	<%= f.submit nil, class: 'btn btn-primary' %>
 <%end%>
+<br>
+
+<table class="table table-inverse">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><%= @item.description %></th>
+      <td><%= image_tag @item.image_url, size: "400x400" %></td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+
+
