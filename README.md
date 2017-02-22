@@ -36,11 +36,6 @@ URL: **heroku-app-url**
 * [x] User is taken to a “Thank you for your order page” that lists the name of item, the total cost (delivery should cost 20,000 VND), the user’s name, the user’s address, and the time the order was created in human-readable format (for example, Tuesday, December 1, 15:25).
 
 
-The following **known issues**:
-
-* List bugs or things that don't work yet
-* I tried to sort food items with price and name. But it does not work.
-
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
