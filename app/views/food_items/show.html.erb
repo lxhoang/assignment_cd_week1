@@ -1,29 +1,27 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @food_item.name %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Image</th>
+      <th></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Description:</strong>
-  <%= @food_item.description %>
-</p>
+<div class='tbody'>
+      <tr>
 
-<p>
-  <strong>Price:</strong>
-  <%= @food_item.price %>
-</p>
+        <td><%= @food_item.description %></td>
+        <td><%= image_tag @food_item.image_url, size: '600x600' %></td>
+        
+      </tr>
+      <tr>
+      <td><%= link_to 'Back', menu_path %> </td>
+        
+      </tr>
 
-<p>
-  <strong>Section:</strong>
-  <%= @food_item.section.name %>
-</p>
+  </div>
+  
+  
 
-<p>
-  <strong>Image url:</strong>
-  <%= @food_item.image_url %>
-</p>
-
-<%= link_to 'Edit', edit_food_item_path(@food_item) %> |
-<%= link_to 'Back', food_items_path %>
+</table>
